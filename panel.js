@@ -1,10 +1,12 @@
+init();
+/*
 document.ontouchstart=function(e){
     e.preventDefault();
 };
-init();
 window.orientationchange=function(){
     init();
 };
+*/
 function init(){
     document.body.style.background="black";
     lowerPanel.style.height=(window.innerHeight - header.getBoundingClientRect().height)+"px";
@@ -17,9 +19,9 @@ function init(){
 }
 
 var mypanel=createPanel(frame,3,4,["a","b","c","d","e","f","g","h","i"]);
-btnBack.on__MOUSEUP__=function(){
+btnBack.onmouseup=function(){
     clickEffect(this,"btnEffect");
-    location.href="fmp://_HOST_/__DB__?script=__SCRIPT__&param="+mypanel.getIDs();
+    //location.href="fmp://_HOST_/__DB__?script=__SCRIPT__&param="+mypanel.getIDs();
 
 };
 
@@ -37,7 +39,7 @@ mypanel.upHandler(function(){
     var subRect=this.querySelector("rect");
     if(this.toggle){
         if(mypanel.count()>5){
-            location.href="fmp://_HOST_/__DB__?script=alertFuncs&param=" + mypanel.count();
+            //location.href="fmp://_HOST_/__DB__?script=alertFuncs&param=" + mypanel.count();
             this.toggle=false;
             subSVG.setAttribute("fill-opacity","0.5");
             this.style.background="#333";
@@ -276,6 +278,7 @@ function createPanel(target,columns,rows,labels){
         //children[i].style.background="url(file:///users/osamu/desktop/gear.png)";
         children[i].innerText=labels[i]?labels[i]:"";
         children[i].toggle=false;
+        children[i].ontoucend=upHandler;
         children[i].onmouseup=upHandler;
     }
     var panelArr=[].slice.call(children);
@@ -291,17 +294,20 @@ function createPanel(target,columns,rows,labels){
         },
         upHandler:function(func){
             panelArr.forEach(function(item){
-                item.on__MOUSEUP__= func;
+                item.onmouseup= func;
+                item.ontouchend= func;
             })
         },
         downHandler:function(func){
             panelArr.forEach(function(item){
                 item.onmousedown= func;
+                item.ontouchstart= func;
             })
         },
         moveHandler:function(func){
             panelArr.forEach(function(item){
                 item.onmousemove= func;
+                item.ontouchstart= func;
             })
         },
         leaveHandler:function(func){

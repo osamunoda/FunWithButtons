@@ -16,6 +16,13 @@ body{
     -webkit-align-items:center;
     border-bottom:1px solid #777;
 }
+#header>div{
+    color:white;
+    font:32px sans-serif;
+}
+#title{
+    color:white;
+}
 #frame{
     height:100%;
     width:100%;
