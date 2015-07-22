@@ -1,5 +1,5 @@
 *{
-    margin:0;padding:0;
+    margin:0;padding:0;box-sizing: border-box;
 }
 body,html{
     height:100%;
@@ -47,9 +47,9 @@ body{
 }
 .target{
     /*background-image:-webkit-radial-gradient(blue 50%, transparent 50%);*/
-    background-image:-webkit-radial-gradient(white 18%,pink 20%,white 22%);
-    -webkit-transition:0.5s background-size;
-    background-size:0%;
+    background-image:-webkit-radial-gradient(white 38%,pink 40%,white 42%);
+    -webkit-transition:0.5s linear background-size;
+    background-size:0;
     background-repeat:no-repeat;
     background-position:center;
     background-color:#eee;
@@ -60,6 +60,6 @@ body{
 }
 #lowerPanel div.afterEffect{
     color:pink;
-    border:2px solid;
+    border:1px solid;
 }
 svg{display:none;}
