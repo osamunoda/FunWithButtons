@@ -35,7 +35,7 @@ mypanel.upHandler(function(){
     this.classList.toggle("change");
 });
 mypanel.afterEffect(function(){
-    this.classList.toggle("afterEffect");
+    /*this.classList.toggle("afterEffect");*/
 });
 function clickEffect(elm,effect){
     elm.classList.add(effect);

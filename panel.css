@@ -46,9 +46,9 @@ body{
     stroke:white;
 }
 .target{
-    /*background-image:-webkit-radial-gradient(blue 50%, transparent 50%);*/
-    background-image:-webkit-radial-gradient(white 38%,pink 40%,white 42%);
-    -webkit-transition:0.5s linear background-size;
+    background-image:-webkit-radial-gradient(blue 50%, transparent 50%);
+    /*background-image:-webkit-radial-gradient(white 38%,pink 40%,white 42%);*/
+    -webkit-transition:0.4s linear background-size;
     background-size:0;
     background-repeat:no-repeat;
     background-position:center;
