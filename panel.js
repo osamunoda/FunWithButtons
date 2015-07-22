@@ -32,14 +32,17 @@ var defaultSetting={
     "fill-opacity":"0.5"
 };
 mypanel.upHandler(function(){
-    this.toggle=!this.toggle;
+    //this.style.background="red";
+    this.classList.add("change");
+    /*this.toggle=!this.toggle;
     var subSVG=this.querySelector("svg");
     this.style.background=this.toggle?"#fff":"#333";
+
     subSVG.setAttribute("fill-opacity",this.toggle?"1":"0.5");
     var subRect=this.querySelector("rect");
     if(this.toggle){
         if(mypanel.count()>5){
-            //location.href="fmp://_HOST_/__DB__?script=alertFuncs&param=" + mypanel.count();
+            location.href="fmp://_HOST_/__DB__?script=alertFuncs&param=" + mypanel.count();
             this.toggle=false;
             subSVG.setAttribute("fill-opacity","0.5");
             this.style.background="#333";
@@ -71,14 +74,18 @@ mypanel.upHandler(function(){
         }
 
     }
-
+*/
 });
-mypanel.css({
-    color:"red",font:"32px sans-serif",background:"#333",
+mypanel.afterEffect(function(){
+    this.classList.add("afterEffect");
+});
+
+/*mypanel.css({
+    color:"red",font:"32px sans-serif",background:"rgba(0,0,0,0)",
     "box-shadow":"inset 0 0 200px rgba(0,0,0,0.3)",
     border:"2px solid #ccc"
-});
-
+});*/
+/*
 var fig1=mypanel.createSVGElm({
     type:"rect",
     x:"5",
@@ -137,8 +144,7 @@ var fig5=mypanel.createSVGElm({
     d:"M5,35L30,10zM26,11L29,14L30,10z",
     stroke:"#444",
     "stroke-width":2,
-    fill:"#444"/*,
-     "marker-end":"url(#myarrow)"*/
+    fill:"#444"
 });
 var marker=mypanel.createMarker({
     type:"polygon",
@@ -238,7 +244,7 @@ mypanel.attr(fig10,{
     id:"redo"
 });
 
-
+*/
 function createPanel(target,columns,rows,labels){
     /* frame style*/
     target.style.margin=0;
@@ -280,6 +286,7 @@ function createPanel(target,columns,rows,labels){
         children[i].toggle=false;
         children[i].ontoucend=upHandler;
         children[i].onmouseup=upHandler;
+        children[i].classList.add("target");
     }
     var panelArr=[].slice.call(children);
     return  {
@@ -296,6 +303,12 @@ function createPanel(target,columns,rows,labels){
             panelArr.forEach(function(item){
                 item.onmouseup= func;
                 item.ontouchend= func;
+            })
+        },
+        afterEffect:function(func){
+            panelArr.forEach(function(item){
+                item.addEventListener("transitionend",func);
+
             })
         },
         downHandler:function(func){
