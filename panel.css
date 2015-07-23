@@ -19,6 +19,9 @@ body{
 #header>div{
     color:white;
     font:32px sans-serif;
+    display:-webkit-flex;
+    -webkit-justify-content:center;
+    -webkit-align-items:center;
 }
 #title{
     color:white;
@@ -36,8 +39,6 @@ body{
 }
 #lowerPanel div{
     border:1px solid #ccc;
-    /*background:#777;*/
-   /* background:#eee;*/
 }
 .btnEffect{
      stroke:white;
@@ -62,4 +63,3 @@ body{
     color:pink;
     border:1px solid;
 }
-svg{display:none;}

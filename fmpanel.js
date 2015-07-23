@@ -1,4 +1,6 @@
-function createPanel(target,columns,rows,labels){
+function createPanel(target,columns,rows,labels,panelCSSClass,isMulti){
+    var isMulti=isMulti?isMulti:false;
+
     /* frame style*/
     target.style.margin=0;
     target.style.padding=0;
@@ -13,7 +15,6 @@ function createPanel(target,columns,rows,labels){
     };
     for(var i=0;i<columns;i++){
         var divParent=document.createElement("div");
-
         divParent.classList.add("__panel_parent");
         divParent.style.display="-webkit-flex";
         divParent.style["-webkit-flex"]="1";
@@ -37,9 +38,9 @@ function createPanel(target,columns,rows,labels){
         //children[i].style.background="url(file:///users/osamu/desktop/gear.png)";
         children[i].innerText=labels[i]?labels[i]:"";
         children[i].toggle=false;
-        children[i].ontoucend=upHandler;
-        children[i].onmouseup=upHandler;
-        children[i].classList.add("target");
+        /*children[i].ontoucend=upHandler;
+        children[i].onmouseup=upHandler;*/
+        children[i].classList.add(panelCSSClass);
     }
     var panelArr=[].slice.call(children);
     return  {
@@ -56,12 +57,25 @@ function createPanel(target,columns,rows,labels){
             panelArr.forEach(function(item){
                 item.onmouseup= func;
                 item.ontouchend= func;
+                item.addEventListener("mouseup",function(){
+                    item.toggle=!item.toggle;
+                });
+                item.addEventListener("touchend",function(e){
+                    e.preventDefault();
+                    item.toggle=!item.toggle;
+                });
+                item.addEventListener("transitionend",function(){
+                    if(isMulti){
+
+                    } else{
+                        alert("Do what you want here! You select "+item.innerText);
+                    }
+                });
             })
         },
         afterEffect:function(func){
             panelArr.forEach(function(item){
                 item.addEventListener("transitionend",func);
-
             })
         },
         downHandler:function(func){
@@ -151,7 +165,18 @@ function createPanel(target,columns,rows,labels){
 
             });
             return selected.join(",");
-        }
+        },
+        getContents:function(){
+            var selected=[];
+            panelArr.forEach(function(item){
+                if(item.toggle){
+                    selected.push(item.innerText);
+                }
+
+            });
+            return selected.join(",");
+        },
+        multiSelect:isMulti
 
 
     }
