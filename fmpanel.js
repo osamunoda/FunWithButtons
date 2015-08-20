@@ -1,3 +1,13 @@
+/**
+ *
+ * @param target : a element in which a panel is created
+ * @param columns : number of columns
+ * @param rows : number of rows
+ * @param labels : array of button label
+ * @param panelCSSClass : set this class to panels
+ * @param isMulti : multi-select  or not
+ * @returns {{count: Function, upHandler: Function, afterEffect: Function, downHandler: Function, moveHandler: Function, leaveHandler: Function, enterHandler: Function, css: Function, attr: Function, setSVG: Function, createSVGElm: Function, createMarker: Function, getColors: Function, getIDs: Function, getContents: Function, multiSelect: *}}
+ */
 function createPanel(target,columns,rows,labels,panelCSSClass,isMulti){
     var isMulti=isMulti?isMulti:false;
 
