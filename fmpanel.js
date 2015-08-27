@@ -1,4 +1,5 @@
 /**
+ fmpanel.js contains one function - createPanel
  *
  * @param target : a element in which a panel is created
  * @param columns : number of columns
@@ -20,6 +21,18 @@ function createPanel(target,columns,rows,labels,panelCSSClass,isMulti){
 
 
     var SVG="http://www.w3.org/2000/svg";
+
+    /* a marker CSS class which indicates toggle-on */
+    document.styleSheets[0].addRule(".toggleMarker","");
+
+    if(typeof panelCSSClass == "object"){
+        var propStr="";
+        for (var prop in panelCSSClass){
+            propStr+=(prop+":"+panelCSSClass[prop]+";");
+        }
+        document.styleSheets[0].addRule(".panelCSSClassMadeByFunc",propStr);
+    }
+
     var upHandler=function(e){
 
     };
@@ -50,7 +63,8 @@ function createPanel(target,columns,rows,labels,panelCSSClass,isMulti){
         children[i].toggle=false;
         /*children[i].ontoucend=upHandler;
         children[i].onmouseup=upHandler;*/
-        children[i].classList.add(panelCSSClass);
+        var childPanelClassName=(typeof panelCSSClass=="object"?"panelCSSClassMadeByFunc":panelCSSClass)
+        children[i].classList.add(childPanelClassName);
     }
     var panelArr=[].slice.call(children);
     return  {
@@ -83,10 +97,38 @@ function createPanel(target,columns,rows,labels,panelCSSClass,isMulti){
                 });
             })
         },
-        afterEffect:function(func){
+        afterEffect:function(className){
+            if(typeof className=="object"){
+                var propStr="";
+                for (var prop in className){
+                    propStr+=(prop+":" + className[prop]+";");
+                }
+                document.styleSheets[0].addRule(".panelAfterTransitionClassMadeByFunc",propStr);
+            }
+            var className=(typeof className=="object")?"panelAfterTransitionClassMadeByFunc":className;
+
             panelArr.forEach(function(item){
-                item.addEventListener("transitionend",func);
+                item.addEventListener("transitionend",function(){
+                    item.classList.toggle(className);
+                });
+                //item.transitionend=className;
             })
+        },
+        decorate:function(propset){
+
+                var propStr="";
+                for (var prop in propset){
+                    propStr+=(prop+":" + propset[prop]+";");
+                }
+                document.styleSheets[0].addRule(".__panel_child::after",propStr);
+        },
+        effectDecorate:function(propset){
+
+            var propStr="";
+            for (var prop in propset){
+                propStr+=(prop+":" + propset[prop]+";");
+            }
+            document.styleSheets[0].addRule(".toggleMarker::before",propStr);
         },
         downHandler:function(func){
             panelArr.forEach(function(item){
@@ -186,7 +228,44 @@ function createPanel(target,columns,rows,labels,panelCSSClass,isMulti){
             });
             return selected.join(",");
         },
-        multiSelect:isMulti
+        multiSelect:isMulti,
+        toggle:function(className){
+
+
+           if(typeof className=="object"){
+               var propStr="";
+               for (var prop in className){
+                   propStr+=(prop+":" + className[prop]+";");
+               }
+               document.styleSheets[0].addRule(".panelCSSToggleClassMadeByFunc",propStr);
+           }
+
+            var className=(typeof className=="object")?"panelCSSToggleClassMadeByFunc":className;
+            var toggleFunc=function(target){
+                target.classList.toggle(className);
+                target.classList.toggle("toggleMarker");
+                target.toggle=!target.toggle;
+            };
+            panelArr.forEach(function(item){
+                item.addEventListener("mouseup",function(){
+                    toggleFunc(this);
+
+                });
+                item.addEventListener("touchend",function(e){
+                    e.preventDefault();
+                    toggleFunc(item);
+
+                });
+                item.addEventListener("transitionend",function(){
+                    if(isMulti){
+
+                    } else{
+                        alert("Do what you want here! You select "+item.innerText);
+                    }
+                });
+            })
+
+        }
 
 
     }

@@ -19,9 +19,6 @@ body{
 #header>div{
     color:white;
     font:32px sans-serif;
-    display:-webkit-flex;
-    -webkit-justify-content:center;
-    -webkit-align-items:center;
 }
 #title{
     color:white;
@@ -47,8 +44,8 @@ body{
     stroke:white;
 }
 .target{
-    background-image:-webkit-radial-gradient(blue 50%, transparent 50%);
-    -webkit-transition:0.4s linear background-size;
+    background-image:-webkit-radial-gradient(white 38%,pink 40%,white 42%);
+    -webkit-transition:0.5s linear background-size;
     background-size:0;
     background-repeat:no-repeat;
     background-position:center;
@@ -61,9 +58,6 @@ body{
     color:pink;
     border:1px solid;
 }
-
-#btnExit:hover path{
-    stroke:"red";
-    fill:red;
+#gear{
+    display:none;
 }
-
