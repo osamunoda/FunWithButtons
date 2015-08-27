@@ -36,7 +36,6 @@ body{
 }
 #lowerPanel div{
     border:1px solid #ccc;
-
 }
 .btnEffect{
      stroke:white;
@@ -45,7 +44,6 @@ body{
     stroke:white;
 }
 .target{
-    /*background-image:-webkit-radial-gradient(blue 50%, transparent 50%);*/
     background-image:-webkit-radial-gradient(white 38%,pink 40%,white 42%);
     -webkit-transition:0.5s linear background-size;
     background-size:0;
@@ -55,10 +53,11 @@ body{
 }
 .change{
     background-size:500%;
-    /*box-shadow:inset 0 0 2em white;*/
 }
 #lowerPanel div.afterEffect{
     color:pink;
     border:1px solid;
 }
-svg{display:none;}
+#gear{
+    display:none;
+}
